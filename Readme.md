@@ -31,13 +31,12 @@ docker run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=formation --name mysql_solo my
 ```
 
 ## Maven dans un Container
-Si on lance la commande suivante, maven retéléchargera a chaque fois les dépendances
+Si on lance la commande suivante, maven retéléchargera à chaque fois les dépendances
 ```
 docker run -it --rm -v "$PWD":/usr/src/mymaven -w /usr/src/mymaven maven:3.3.9-jdk-8 mvn test
 ```
-Désormais, on stocke les dépendances sur la machine locale
+Désormais, on stocke les dépendances sur la machine locale (dans le répertoire ~/.m2)
 ```
-mkdir ~/.m2
 docker run -it --rm -v "$PWD":/usr/src/mymaven -v ~/.m2:/root/.m2 -w /usr/src/mymaven maven:3.3.9-jdk-8 mvn test
 ```
 
@@ -69,3 +68,7 @@ MAVEN_HOME=/usr/share/maven
 HOME=/root
 ```
 Il ne reste donc plus qu'a utiliser la variable d'environnement pour pouvoir se connecter au MySQL.
+Exemple en java :
+```
+String ipMySQL = System.getenv().get("DB_PORT_3306_TCP_ADDR");
+```
