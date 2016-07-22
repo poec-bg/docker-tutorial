@@ -29,3 +29,12 @@ Il est nécessaire de redémarrer votre session linux pour voir ce changement op
 ```
 docker run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=formation --name mysql_solo mysql
 ```
+
+## Maven dans un Container
+```
+docker run -it --rm -v "$PWD":/usr/src/mymaven -w /usr/src/mymaven maven:3.3.9-jdk-8 mvn test
+
+mkdir ~/.m2
+
+docker run -it --rm -v "$PWD":/usr/src/mymaven -v ~/.m2:/root/.m2 -w /usr/src/mymaven maven:3.3.9-jdk-8 mvn test
+```
